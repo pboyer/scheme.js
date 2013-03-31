@@ -16,8 +16,3 @@ assert.equal( S.parse_eval( '(facto 5)' ), 120 );
 assert.equal( S.parse_eval('(begin (facto 5) )'), 120 );
 assert.equal( S.parse_eval('(begin (facto 5) (+ 2 2))'), 4  );
 
-// the y combinator
-S.parse_eval('(define Y (lambda (X) ((lambda (procedure) (X (lambda (arg) ((procedure procedure) arg)))) (lambda (procedure) (X (lambda (arg) ((procedure procedure) arg)))))))');
-S.parse_eval('(define F* (lambda (func-arg) (lambda (n) (if (zero? n) 1 (* n (func-arg (- n 1)))))))');
-console.log( S.parse_eval('(define facto2 (Y F*))') );
-
