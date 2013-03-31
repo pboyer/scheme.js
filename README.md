@@ -16,10 +16,10 @@ Use the interpreter object like this:
 
     S.parse_eval('(+ 2 2)');   // returns 4
     S.parse_eval( '(define facto '+
-			'(lambda (x) '+
-			    '(if (<= x 1) '+
-			        '1'+
-                    '(* x (facto (- x 1) )))))' );
+					'(lambda (x) '+
+			    		'(if (<= x 1) '+
+			        		'1'+
+                    		'(* x (facto (- x 1) )))))' );
     S.parse_eval('(facto 5)'); // returns 120
  
 **REPL**
