@@ -136,7 +136,18 @@ var Interpreter = function(){
 
 };
 
-// Export these objects 
-exports.Interpreter = Interpreter;
-exports.Env = Env;
+if ( typeof exports != 'object' || exports === undefined )  // browser context
+{
+	var scheme = {};
+	scheme.Interpreter = Interpreter;
+	scheme.Env = Env;
+}
+else // node.js context
+{
+	// Export these objects 
+	exports.Interpreter = Interpreter;
+	exports.Env = Env;
+
+}
+
 

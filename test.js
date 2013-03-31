@@ -11,7 +11,11 @@ S.parse_eval( '(define a (lambda (x) (+ 2 x)))' );
 assert.equal( S.parse_eval( '(a 5)' ), 7 );
 S.parse_eval( '(set! a (lambda (x) (+ 8 x)))' );
 assert.equal( S.parse_eval( '(a 5)' ), 13 );
-S.parse_eval( '(define facto (lambda (x) (if (<= x 1) 1 (* x (fibo (- x 1) )))))' );
+S.parse_eval( '(define facto '+
+								'(lambda (x) '+
+									'(if (<= x 1) '+
+										'1'+
+										'(* x (facto (- x 1) )))))' );
 assert.equal( S.parse_eval( '(facto 5)' ), 120 );
 assert.equal( S.parse_eval('(begin (facto 5) )'), 120 );
 assert.equal( S.parse_eval('(begin (facto 5) (+ 2 2))'), 4  );
