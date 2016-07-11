@@ -8,8 +8,8 @@ var Env = function(vars, args, outer){
 	vars.forEach(function(val, i) {
 		that.scope[val] = args[i];
 	});
-  outer = typeof outer !== 'undefined' ? outer : null;
-  this.outer = outer;
+  	outer = typeof outer !== 'undefined' ? outer : null;
+  	this.outer = outer;
 
 	this.find = function(key){
 		return this.scope[key] != null ? this.scope: this.outer.find(key);
@@ -67,27 +67,27 @@ var Interpreter = function(){
 		env = typeof env !== 'undefined' ? env : this.global_env;
 
 		var that = this;
-		if ( typeof x === "string") {								// variable reference
+		if ( typeof x === "string") {	        // variable reference
 			return env.find(x)[x];
-		} else if ( !(x instanceof Array) ){				// literal	
+		} else if ( !(x instanceof Array) ){	// literal	
 			return x; 
-		} else if (x[0] === "quote") {							// (quote exp)
+		} else if (x[0] === "quote") {		// (quote exp)
 			return x[1];
-		} else if (x[0] === "if") {									// (if test conseq alt)
+		} else if (x[0] === "if") {		// (if test conseq alt)
 			var test = x[1], conseq = x[2], alt = x[3];
-	    return this.eval( (this.eval(test, env) ? conseq : alt), env );
-		} else if (x[0] === "set!") {								// (set! var exp)
+	    		return this.eval( (this.eval(test, env) ? conseq : alt), env );
+		} else if (x[0] === "set!") {		// (set! var exp)
 			var vari = x[1], exp = x[2];
 			env.find(vari)[vari] = this.eval(exp); 
-		} else if (x[0] === "define") { 						// (define var exp)
+		} else if (x[0] === "define") { 	// (define var exp)
 			var vari = x[1], exp = x[2];
 			env.scope[vari] = this.eval(exp, env);
-		} else if (x[0] === "lambda") {							// (lambda (var*) exp)
+		} else if (x[0] === "lambda") {		// (lambda (var*) exp)
 			var vars = x[1], exp = x[2];
 			return (function(args) {
 				return that.eval( exp, new Env(vars, arguments, env) );
 			});
-		} else if (x[0] === "begin") {							// (begin exp*)
+		} else if (x[0] === "begin") {		// (begin exp*)
 			var f;
 			for (var i = 1, l = x.length; i < l; i++) {
 				f = this.eval( x[i] );
@@ -95,7 +95,7 @@ var Interpreter = function(){
 			return f;
 		} else {		
 			var that = this;									
-			var exps = x.map(function(exp) { 						// (proc exp*)
+			var exps = x.map(function(exp) {// (proc exp*)
 				return that.eval(exp, env);
 			});
 		  var proc = exps.shift();
