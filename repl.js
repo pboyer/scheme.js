@@ -9,12 +9,12 @@ function eval(cmd, context, filename, callback) {
 	} catch (e) {
 		var result = e;
 	}
-  callback(null, result);
+  	callback(null, result);
 }
 
 repl.start({
-  prompt: "s>>>",
-  input: process.stdin,
-  output: process.stdout,
-  eval: eval
+	prompt: "s>>>",
+	input: process.stdin,
+	output: process.stdout,
+	eval: eval
 });
